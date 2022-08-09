@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@maticnetwork/maticjs": "^3.3.0",
+    "@maticnetwork/maticjs": "^3.4.0-beta.0",
     "@maticnetwork/maticjs-ethers": "^1.0.2",
     "dotenv": "^16.0.1",
     "ethers": "^5.6.9",
