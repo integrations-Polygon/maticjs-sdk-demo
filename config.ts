@@ -20,7 +20,7 @@ export default {
       // If you deploy your ERC20 Update the address below
       erc20: "0x655F2166b0709cd575202630952D71E2bB0d61Af",
     },
-    // If you deploy your ERC20 Update the address below  
+    // If you deploy your ERC20 Update the address below
     // dummy erc20 deployed by Polygon Team on the Mumbai Chain
     child: {
       erc20: "0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1",
