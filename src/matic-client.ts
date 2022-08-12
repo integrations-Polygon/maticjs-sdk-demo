@@ -38,3 +38,13 @@ getMaticClient()
   });
 export default matic;
 
+export async function getGasPrice(
+  provider: providers.BaseProvider,
+  chain: String
+): Promise<BigNumber> {
+  const gasPrice = await provider.getGasPrice();
+  console.log(
+    `${chain} chain gas price: ${utils.formatUnits(gasPrice, "gwei")} gwei`
+  );
+  return gasPrice;
+}
