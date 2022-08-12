@@ -84,6 +84,59 @@ app.post("/parent-deposit-erc20", async (req, res, next) => {
     next(error);
   }
 });
+app.get("/is-deposited", async (req, res, next) => {
+  try {
+    const { depositTxHash } = req.query as any;
+
+    const isDeposited = await matic.isDeposited(depositTxHash);
+
+    return res.json({ depositTxHash, isDeposited });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/withdraw-erc20", async (req, res, next) => {
+  try {
+    const { amount } = req.body;
+
+    const parsedAmount = utils.parseUnits(amount, 18);
+
+    const childTokenErc20 = matic.erc20(pos.child.erc20);
+
+    const gasPrice = await getGasPrice(provider.child, "child");
+
+    const result = await childTokenErc20.withdrawStart(
+      parsedAmount.toHexString(),
+      {
+        maxPriorityFeePerGas: gasPrice.toHexString(),
+        maxFeePerGas: gasPrice.toHexString(),
+      }
+    );
+
+    const txnHash = await result.getTransactionHash();
+    console.log(`txnResultLink: https://mumbai.polygonscan.com/tx/${txnHash}`);
+
+    return res.json({
+      hash: txnHash,
+      link: `https://mumbai.polygonscan.com/tx/${txnHash}`,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/is-checkpointed", async (req, res, next) => {
+  try {
+    const { burnTxHash } = req.query as any;
+
+    const isCheckPointed = await matic.isCheckPointed(burnTxHash);
+
+    return res.json({ burnTxHash, isCheckPointed });
+  } catch (error) {
+    next(error);
+  }
+});
 app.listen(parseInt(config.server.port), () => {
   console.log(`Listening for Requests at port: ${config.server.port}`);
 });
