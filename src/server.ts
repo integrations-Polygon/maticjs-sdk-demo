@@ -53,3 +53,37 @@ app.post("/parent-approve-erc20", async (req, res, next) => {
     next(error);
   }
 });
+
+app.post("/parent-deposit-erc20", async (req, res, next) => {
+  try {
+    const { amount } = req.body;
+
+    const parsedAmount = utils.parseUnits(amount, 18);
+
+    const rootTokenErc20 = matic.erc20(pos.parent.erc20, true);
+
+    const gasPrice = await getGasPrice(provider.parent, "root");
+
+    const result = await rootTokenErc20.deposit(
+      parsedAmount.toHexString(),
+      user1.address,
+      {
+        maxPriorityFeePerGas: gasPrice.toHexString(),
+        maxFeePerGas: gasPrice.toHexString(),
+      }
+    );
+
+    const txnHash = await result.getTransactionHash();
+    console.log(`txnResultLink: https://goerli.etherscan.io/tx/${txnHash}`);
+
+    return res.json({
+      hash: txnHash,
+      link: `https://goerli.etherscan.io/tx/${txnHash}`,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+app.listen(parseInt(config.server.port), () => {
+  console.log(`Listening for Requests at port: ${config.server.port}`);
+});
