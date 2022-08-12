@@ -9,6 +9,8 @@ const { pos, user1 } = config;
 
 const app = express();
 
+app.use(express.json());
+
 app.use(errorHandler);
 
 app.get("/erc20-balance", async (req, res, next) => {
@@ -25,3 +27,29 @@ app.get("/erc20-balance", async (req, res, next) => {
   }
 });
 
+app.post("/parent-approve-erc20", async (req, res, next) => {
+  try {
+    const { amount } = req.body;
+
+    const parsedAmount = utils.parseUnits(amount, 18);
+
+    const rootTokenErc20 = matic.erc20(pos.parent.erc20, true);
+
+    const gasPrice = await getGasPrice(provider.parent, "root");
+
+    const result = await rootTokenErc20.approve(parsedAmount.toHexString(), {
+      maxPriorityFeePerGas: gasPrice.toHexString(),
+      maxFeePerGas: gasPrice.toHexString(),
+    });
+
+    const txnHash = await result.getTransactionHash();
+    console.log(`txnResultLink: https://goerli.etherscan.io/tx/${txnHash}`);
+
+    return res.json({
+      hash: txnHash,
+      link: `https://goerli.etherscan.io/tx/${txnHash}`,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
