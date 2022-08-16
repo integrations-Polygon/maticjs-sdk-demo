@@ -1,0 +1,440 @@
+{
+  "info": {
+    "_postman_id": "7b0767ed-61d5-4dac-8fb6-33923d71eb86",
+    "name": "MaticJs Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get ERC20 Balance",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Base_Url}}/erc20-balance",
+          "host": ["{{Base_Url}}"],
+          "path": ["erc20-balance"],
+          "query": [
+            {
+              "key": "isParent",
+              "value": "true",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Approve Predicate Contract Copy",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"amount\": \"0.1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Base_Url}}/parent-approve-erc20",
+          "host": ["{{Base_Url}}"],
+          "path": ["parent-approve-erc20"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deposit ERC20",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"amount\": \"0.1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Base_Url}}/parent-deposit-erc20",
+          "host": ["{{Base_Url}}"],
+          "path": ["parent-deposit-erc20"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Is Deposited",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Base_Url}}/is-deposited?depositTxHash=0x357cd02d0fc0f046c6c5869651e3ae20c01c5d2cb9add568cc78e842c38efeba",
+          "host": ["{{Base_Url}}"],
+          "path": ["is-deposited"],
+          "query": [
+            {
+              "key": "depositTxHash",
+              "value": "0x357cd02d0fc0f046c6c5869651e3ae20c01c5d2cb9add568cc78e842c38efeba"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Is Deposited False",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Base_Url}}/is-deposited?burnTxHash=0x8dc9c8497a55a19d8dc0b2c298e96f256b65d53db288ca04fb8df02200c2a0b3",
+              "host": ["{{Base_Url}}"],
+              "path": ["is-deposited"],
+              "query": [
+                {
+                  "key": "burnTxHash",
+                  "value": "0x8dc9c8497a55a19d8dc0b2c298e96f256b65d53db288ca04fb8df02200c2a0b3"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "103"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"67-ZatjxALQt+dOlQxkUur7WH9qUZ4\""
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Aug 2022 10:46:41 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"burnTxHash\": \"0x8dc9c8497a55a19d8dc0b2c298e96f256b65d53db288ca04fb8df02200c2a0b3\",\n    \"isDeposited\": false\n}"
+        },
+        {
+          "name": "Is Deposited True",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Base_Url}}/is-deposited?burnTxHash=0x8dc9c8497a55a19d8dc0b2c298e96f256b65d53db288ca04fb8df02200c2a0b3",
+              "host": ["{{Base_Url}}"],
+              "path": ["is-deposited"],
+              "query": [
+                {
+                  "key": "burnTxHash",
+                  "value": "0x8dc9c8497a55a19d8dc0b2c298e96f256b65d53db288ca04fb8df02200c2a0b3"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "102"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"66-yBeCrPDCcoJAscGoC7tPj+m4Cmk\""
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Aug 2022 11:17:29 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"burnTxHash\": \"0x8dc9c8497a55a19d8dc0b2c298e96f256b65d53db288ca04fb8df02200c2a0b3\",\n    \"isDeposited\": true\n}"
+        }
+      ]
+    },
+    {
+      "name": "Withdraw ERC20",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"amount\": \"0.1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Base_Url}}/withdraw-erc20",
+          "host": ["{{Base_Url}}"],
+          "path": ["withdraw-erc20"]
+        }
+      },
+      "response": [
+        {
+          "name": "Withdraw ERC20",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\": \"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{Base_Url}}/withdraw-erc20",
+              "host": ["{{Base_Url}}"],
+              "path": ["withdraw-erc20"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "187"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"bb-q5GLb3C7uelZnJANbm5GXnz4wn4\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 16 Aug 2022 07:21:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"hash\": \"0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39\",\n    \"link\": \"https://mumbai.polygonscan.com/tx/0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Is Checkpointed",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{Base_Url}}/is-checkpointed?burnTxHash=0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39",
+          "host": ["{{Base_Url}}"],
+          "path": ["is-checkpointed"],
+          "query": [
+            {
+              "key": "burnTxHash",
+              "value": "0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Is Checkpointed",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Base_Url}}/is-checkpointed?burnTxHash=0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39",
+              "host": ["{{Base_Url}}"],
+              "path": ["is-checkpointed"],
+              "query": [
+                {
+                  "key": "burnTxHash",
+                  "value": "0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "105"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"69-jiSBkf1a9e6Jmx8HLwYA/XQlAoM\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 16 Aug 2022 08:02:45 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"burnTxHash\": \"0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39\",\n    \"isCheckPointed\": true\n}"
+        }
+      ]
+    },
+    {
+      "name": "Exit ERC20",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"burnTxHash\": \"0xbc7110c0949f1b5a9682a3a804d16f8ebf5a8d70c1a3ac0f4349ce9173346b39\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{Base_Url}}/exit-erc20",
+          "host": ["{{Base_Url}}"],
+          "path": ["exit-erc20"]
+        }
+      },
+      "response": [
+        {
+          "name": "Exit ERC20 Not Checkpointed",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"burnTxHash\": \"0x4b33ebb080e8154aade5d825661d6c4774e93f0590753d67afdc957d6f4b20f5\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{Base_Url}}/exit-erc20",
+              "host": ["{{Base_Url}}"],
+              "path": ["exit-erc20"]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "html",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "default-src 'none'"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "478"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 16 Aug 2022 08:16:31 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Error: Burn Not Checkpointed\n            <br> &nbsp; &nbsp;at C:\\Users\\Hp\\Desktop\\react-practice\\matic-sdk\\src\\server.ts:148:21\n            <br> &nbsp; &nbsp;at Generator.next (&lt;anonymous&gt;)\n            <br> &nbsp; &nbsp;at fulfilled (C:\\Users\\Hp\\Desktop\\react-practice\\matic-sdk\\src\\server.ts:28:58)\n            <br> &nbsp; &nbsp;at processTicksAndRejections (internal/process/task_queues.js:95:5)\n        </pre>\n    </body>\n</html>"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "Base_Url",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
