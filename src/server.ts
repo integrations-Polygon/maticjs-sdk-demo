@@ -84,6 +84,7 @@ app.post("/parent-deposit-erc20", async (req, res, next) => {
     next(error);
   }
 });
+
 app.get("/is-deposited", async (req, res, next) => {
   try {
     const { depositTxHash } = req.query as any;
@@ -137,6 +138,38 @@ app.get("/is-checkpointed", async (req, res, next) => {
     next(error);
   }
 });
+
+app.post("/exit-erc20", async (req, res, next) => {
+  try {
+    const { burnTxHash } = req.body;
+
+    const isCheckPointed = await matic.isCheckPointed(burnTxHash);
+    if (!isCheckPointed) {
+      const error = new Error("Burn Not Checkpointed");
+      next(error);
+    } else {
+      const erc20RootToken = matic.erc20(provider.parent, true);
+
+      const gasPrice = await getGasPrice(provider.parent, "root");
+
+      const result = await erc20RootToken.withdrawExit(burnTxHash, {
+        maxPriorityFeePerGas: gasPrice.toHexString(),
+        maxFeePerGas: gasPrice.toHexString(),
+      });
+
+      const txnHash = await result.getTransactionHash();
+      console.log(`txnResultLink: https://goerli.etherscan.io/tx/${txnHash}`);
+
+      return res.json({
+        hash: txnHash,
+        link: `https://goerli.etherscan.io/tx/${txnHash}`,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.listen(parseInt(config.server.port), () => {
   console.log(`Listening for Requests at port: ${config.server.port}`);
 });
