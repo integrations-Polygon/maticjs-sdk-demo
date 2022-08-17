@@ -1,7 +1,7 @@
 import { getDefaultProvider, providers } from "ethers";
 import config from "../config";
 
-const { chainId } = config;
+const { chainId, rpc } = config;
 
 const childProviderList = [
   // public providers
@@ -31,6 +31,6 @@ const childProvider =
     : new providers.FallbackProvider(childProviderList);
 
 export default {
-  parent: parentProvider,
-  child: childProvider,
+  parent: { jsonRpcProvider: new providers.JsonRpcProvider(rpc.root), fallbackProvider: parentProvider },
+  child: { jsonRpcProvider: new providers.JsonRpcProvider(rpc.child), fallbackProvider: childProvider },
 };
