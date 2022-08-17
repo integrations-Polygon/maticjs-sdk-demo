@@ -16,13 +16,13 @@ const getMaticClient = async () => {
     network: chainId.root === "1" ? "mainnet" : "testnet",
     version: chainId.root === "1" ? "v1" : "mumbai",
     parent: {
-      provider: new Wallet(user1.privateKey, provider.parent),
+      provider: new Wallet(user1.privateKey, provider.parent.jsonRpcProvider),
       defaultConfig: {
         from: user1.address,
       },
     },
     child: {
-      provider: new Wallet(user1.privateKey, provider.child),
+      provider: new Wallet(user1.privateKey, provider.child.jsonRpcProvider),
       defaultConfig: {
         from: user1.address,
       },
