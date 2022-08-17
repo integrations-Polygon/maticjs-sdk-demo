@@ -35,7 +35,7 @@ app.post("/parent-approve-erc20", async (req, res, next) => {
 
     const rootTokenErc20 = matic.erc20(pos.parent.erc20, true);
 
-    const gasPrice = await getGasPrice(provider.parent, "root");
+    const gasPrice = await getGasPrice(provider.parent.fallbackProvider, "root");
 
     const result = await rootTokenErc20.approve(parsedAmount.toHexString(), {
       maxPriorityFeePerGas: gasPrice.toHexString(),
@@ -62,7 +62,7 @@ app.post("/parent-deposit-erc20", async (req, res, next) => {
 
     const rootTokenErc20 = matic.erc20(pos.parent.erc20, true);
 
-    const gasPrice = await getGasPrice(provider.parent, "root");
+    const gasPrice = await getGasPrice(provider.parent.fallbackProvider, "root");
 
     const result = await rootTokenErc20.deposit(
       parsedAmount.toHexString(),
@@ -105,7 +105,7 @@ app.post("/withdraw-erc20", async (req, res, next) => {
 
     const childTokenErc20 = matic.erc20(pos.child.erc20);
 
-    const gasPrice = await getGasPrice(provider.child, "child");
+    const gasPrice = await getGasPrice(provider.child.fallbackProvider, "child");
 
     const result = await childTokenErc20.withdrawStart(
       parsedAmount.toHexString(),
@@ -148,9 +148,9 @@ app.post("/exit-erc20", async (req, res, next) => {
       const error = new Error("Burn Not Checkpointed");
       next(error);
     } else {
-      const erc20RootToken = matic.erc20(provider.parent, true);
+      const erc20RootToken = matic.erc20(provider.parent.fallbackProvider, true);
 
-      const gasPrice = await getGasPrice(provider.parent, "root");
+      const gasPrice = await getGasPrice(provider.parent.fallbackProvider, "root");
 
       const result = await erc20RootToken.withdrawExit(burnTxHash, {
         maxPriorityFeePerGas: gasPrice.toHexString(),
