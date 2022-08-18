@@ -11,8 +11,6 @@ const app = express();
 
 app.use(express.json());
 
-app.use(errorHandler);
-
 app.get("/erc20-balance", async (req, res, next) => {
   try {
     let { isParent }: { isParent: boolean } = req.query as any;
@@ -169,6 +167,8 @@ app.post("/exit-erc20", async (req, res, next) => {
     next(error);
   }
 });
+
+app.use(errorHandler);
 
 app.listen(parseInt(config.server.port), () => {
   console.log(`Listening for Requests at port: ${config.server.port}`);
